@@ -99,6 +99,10 @@ def addOne():
     data_list = data_list.replace("\\.", "")
     data_list = data_list.split(',')
     if(len(data_list) == 5):
+        if(float(data_list[3]) <= 0):
+            data_list[3] = "20"
+        if(float(data_list[4]) <= 0):
+            data_list[4] = "50"
         height = float(data_list[0])
         light = float(data_list[2])
         temp = float(data_list[3])
