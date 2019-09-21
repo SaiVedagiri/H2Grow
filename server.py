@@ -24,10 +24,10 @@ def createGraph(varName, values):
     x = []
     plt.clf()
 
-    if len(values) < 10:
+    if len(values) < 20:
         y = values
     else:
-        y = values[-10:]
+        y = values[-20:]
 
     for i in range(0, len(y)):
         x.append(i)
