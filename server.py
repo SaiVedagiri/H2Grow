@@ -3,12 +3,11 @@ import requests
 import json
 import matplotlib.pyplot as plt
 import base64
-import pyrebase
 from flask import Flask, jsonify, request, render_template
-import random as r
-import numpy as np
-# import pandas as pd
 
+# import numpy as np
+# import pandas as pd
+# import matplotlib.pyplot as plt
 # from sklearn.model_selection import train_test_split
 # from sklearn.datasets import load_boston
 # from sklearn.metrics import mean_squared_error, r2_score
@@ -20,9 +19,6 @@ tempValues = list()
 humidityValues = list()
 soilMoistureValues = list()
 healthScoreValues = list()
-
-
-# Enter your API key here
 
 def createGraph(varName, values):
     x = []
