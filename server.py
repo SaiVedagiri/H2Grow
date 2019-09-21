@@ -24,10 +24,11 @@ def createGraph(varName, values):
     x = []
     plt.clf()
 
-    if len(values) < 50:
+    if len(values) < 10:
         y = values
     else:
-        y = values[-50:]
+        y = values[-10:]
+        values = values[-10:]
 
     for i in range(0, len(y)):
         x.append(i)
@@ -35,8 +36,12 @@ def createGraph(varName, values):
     # plotting the points
     plt.plot(x, y, color = 'red')
 
-    axes = plt.gca()
-    axes.set_ylim([0, 100])
+    if(varName == "Height (centimeters)"):
+        axes = plt.gca()
+        axes.set_ylim([0, 30])
+    else:
+        axes = plt.gca()
+        axes.set_ylim([0, 100])
 
     # naming the x axis
     plt.xlabel('Time (seconds)')
