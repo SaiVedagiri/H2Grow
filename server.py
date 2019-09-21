@@ -14,17 +14,6 @@ import numpy as np
 # from sklearn.metrics import mean_squared_error, r2_score
 # from sklearn.linear_model import LinearRegression
 
-config = {
-    "apiKey": "AIzaSyDHsfYrxFiLEzt6c0K_XYpRsz-wYn5avPw",
-    "authDomain": "h2growapp.firebaseapp.com",
-    "databaseURL": "https://h2growapp.firebaseio.com",
-    "storageBucket": ""
-}
-
-firebase = pyrebase.initialize_app(config)
-
-
-db = firebase.database()
 heightValues = list()
 lightValues = list()
 tempValues = list()
@@ -34,7 +23,6 @@ healthScoreValues = list()
 
 
 # Enter your API key here
-api_key = "3829e3108d626e59f6056fe0ae9d7886"
 
 def createGraph(varName, values):
     x = []
@@ -44,8 +32,8 @@ def createGraph(varName, values):
     else:
         y = values[-50:]
 
-    for i in range(0,len(y)):
-            x.append(i)
+    for i in range(0, len(y)):
+        x.append(i)
 
     # plotting the points
     plt.plot(x, y)
@@ -139,13 +127,11 @@ def addOne():
         return (str(createGraph("Humidity", humidityValues)))
     elif(data_list[0] == "tempValues"):
         return (str(tempValues[0]))
+    elif(data_list[0] == "soil"):
+        return (str(createGraph("Soil Moisture", soilMoistureValues)))
     else:
         return "Invalid request"
-    # answer = value
-    # return 'sup'
-# @app.route('/hello')
-# def workplz():
-# print(answer)
-# return render_template('home.html', value=answer)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
