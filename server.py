@@ -36,6 +36,7 @@ def createGraph(varName, values):
     plt.plot(x, y, color = 'red')
 
     axes = plt.gca()
+    axes.set_xlim([0, 50])
     axes.set_ylim([0, 100])
 
     # naming the x axis
