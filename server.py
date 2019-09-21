@@ -36,56 +36,6 @@ healthScoreValues = list()
 # Enter your API key here
 api_key = "3829e3108d626e59f6056fe0ae9d7886"
 
-
-def getData():
-    # base_url variable to store url
-    base_url = "http://api.openweathermap.org/data/2.5/weather?"
-
-    # Give city name
-    city_name = "Brooklyn"
-
-    # complete_url variable to store
-    # complete url address
-    complete_url = base_url + "appid=" + api_key + "&q=" + city_name
-
-    # get method of requests module
-    # return response object
-    response = requests.get(complete_url)
-
-    # json method of response object
-    # convert json format data into
-    # python format data
-    x = response.json()
-    count = 1
-    temp = 0
-    for i in x["weather"]:
-        description = (i["description"])
-    for i in x["main"]:
-        data = x["main"][i]
-        if count == 1:
-            temp = data
-            count += 1
-        if count == 2:
-            airPressure = data
-            count += 1
-        if count == 3:
-            humidity = data
-            count += 1
-        if count == 4:
-            minimumTemp = data
-            count += 1
-        if count == 5:
-            maximumTemp = data
-            count += 1
-        localInfo = []
-        localInfo.append(temp)
-        localInfo.append(airPressure)
-        localInfo.append(humidity)
-        localInfo.append(minimumTemp)
-        localInfo.append(maximumTemp)
-        return localInfo
-
-
 def createGraph(varName, values):
     x = []
 
@@ -113,49 +63,27 @@ def createGraph(varName, values):
 
     with open("values.png", "rb") as imageFile:
         imageStr = base64.b64encode(imageFile.read())
-        print(imageStr)
-    return imageStr
+    return str(imageStr)[2:-1]
 
 
-def returnTotalScore(insideInfo):
-    h = getData()
-    h[0] = 70
-    temp = (h[0])
-    # temp = h[0] * (9/5) - 459.67
-    # print(temp)
-    optimalTemp = 60
-    tempScore = 100 - (temp - optimalTemp)
-    h[1] = 1030
+def returnTotalScore(h):
+    height = float(h[0])
+    soilMoisture = float(h[1])
+    light = float(h[2])
+    temp = float(h[3])
+    humidity = float(h[4])
 
-    airPressureScore = 100 - (h[1] - 1000)/7
-    h[2] = 67
+    heightScore = 100 - abs(26-height) * 4
+    soilScore = 100 - abs(40-soilMoisture)
+    lightScore = 100 - abs(80-light)
+    tempScore = 100 - abs(21-temp) * 5
+    humidityScore = 100 - abs(50-humidity)
 
-    humidityScore = abs(100 - (h[2] - 50))
-    minimumTemp = h[3]
-    maximumTemp = h[4]
-    airQualityScore = abs(100 - (float(insideInfo[0]) * 10))
-    insideHumidityScore = abs(100 - abs((float(insideInfo[1]) - 50)))
-    insideTempScore = float(insideInfo[2])
-    print(tempScore)
-    print(airPressureScore)
-    print(humidityScore)
-    print(airQualityScore)
-    print(insideHumidityScore)
-    print(insideTempScore)
-    # temperatureValues.append(temp)
-    # airValues.append(h[1])
-
-    # db.update({"airScore": str(airQualityScore)})
-    # db.update({"humidityScore": str(humidityScore)})
-    # db.update({"temperatureScore": str(tempScore)})
-    score = (tempScore + airPressureScore + humidityScore +
-             airQualityScore + insideHumidityScore + insideTempScore)/6
-    x = int(100-score)
-    # db.update({"healthScore": str(x)})
+    score = (heightScore * 2 + soilScore * 3 + lightScore +
+             tempScore + humidityScore)/8
+    x = int(score)
     return x
 
-
-print(returnTotalScore([1.5, 45, 73]))
 
 # Cead the swagger.yml file to configure the endpoints
 
