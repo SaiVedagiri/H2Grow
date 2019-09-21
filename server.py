@@ -195,8 +195,8 @@ def addOne():
         soilMoistureValues.append(soilMoisture)
         healthScoreValues.append(returnTotalScore(data_list))
         pumpVal = 1
-        if(soilMosture >= 40):
-            pumpBoolean = 0
+        if(soilMoisture >= 40):
+            pumpVal = 0
         return (str(returnTotalScore(data_list)) + "," + str(pumpVal))
     if(data_list[0] == "health"):
         return (str(createGraph("Health", healthScoreValues)))
