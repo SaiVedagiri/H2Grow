@@ -113,6 +113,8 @@ def addOne():
     elif(data_list[0] == "health"):
         return (str(createGraph("Health", healthScoreValues)))
     elif(data_list[0] == "healthVal"):
+        if(len(healthScoreValues) == 0):
+            return "N/A"
         return (str(healthScoreValues[len(healthScoreValues)-1]))
     elif(data_list[0] == "height"):
         return (str(createGraph("Height", heightValues)))
