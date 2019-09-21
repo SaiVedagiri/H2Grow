@@ -44,7 +44,7 @@ def createGraph(varName, values):
     plt.ylabel(varName)
 
     # giving a title to my graph
-    plt.title(varName + ' Vs Time')
+    plt.title(varName + ' Vs Time (seconds)')
 
     # function to show the plot
     plt.savefig("values.png", bbox_inches="tight")
