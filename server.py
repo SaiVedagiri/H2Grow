@@ -138,7 +138,7 @@ def addOne():
     elif(data_list[0] == "soil"):
         return (str(createGraph("Soil Moisture (%)", soilMoistureValues)))
     elif(data_list[0] == 'water'):
-        a = 40-soilMoistureValues
+        a = 40-soilMoistureValues[len(soilMoistureValues)-1]
         if a >= 0:
             return str(a)
         else:
