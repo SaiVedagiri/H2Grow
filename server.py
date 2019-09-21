@@ -6,6 +6,13 @@ import base64
 import pyrebase
 from flask import Flask, jsonify, request, render_template
 import random as r
+import numpy as np
+import pandas as pd
+
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_boston
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.linear_model import LinearRegression
 
 config = {
     "apiKey": "AIzaSyDHsfYrxFiLEzt6c0K_XYpRsz-wYn5avPw",
@@ -23,6 +30,7 @@ lightValues = list()
 tempValues = list()
 humidityValues = list()
 soilMoistureValues = list()
+healthScoreValues = list()
 
 
 # Enter your API key here
@@ -78,10 +86,14 @@ def getData():
         return localInfo
 
 
-def createGraph(temperatures):
+def createGraph(varName, values):
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     # corresponding y axis values
-    y = temperatures
+
+    if len(values) < 10:
+        y = valu
+
+    y = values[-10:]
 
     # plotting the points
     plt.plot(x, y)
@@ -89,19 +101,18 @@ def createGraph(temperatures):
     # naming the x axis
     plt.xlabel('Time')
     # naming the y axis
-    plt.ylabel('Temperature')
+    plt.ylabel(varName)
 
     # giving a title to my graph
-    plt.title('Temperature Vs Time')
+    plt.title(varName + ' Vs Time')
 
     # function to show the plot
-    plt.savefig("temperature.png", bbox_inches="tight")
+    plt.savefig("values.png", bbox_inches="tight")
 
-    with open("temperature.png", "rb") as imageFile:
+    with open("values.png", "rb") as imageFile:
         imageStr = base64.b64encode(imageFile.read())
-        db.update({"temperatureGraph": str(imageStr)})
-        print(str)
-    return str
+        print(imageStr)
+    return imageStr
 
 
 def returnTotalScore(insideInfo):
@@ -129,16 +140,16 @@ def returnTotalScore(insideInfo):
     print(airQualityScore)
     print(insideHumidityScore)
     print(insideTempScore)
-    #temperatureValues.append(temp)
-    #airValues.append(h[1])
+    # temperatureValues.append(temp)
+    # airValues.append(h[1])
 
-    #db.update({"airScore": str(airQualityScore)})
-    #db.update({"humidityScore": str(humidityScore)})
-    #db.update({"temperatureScore": str(tempScore)})
+    # db.update({"airScore": str(airQualityScore)})
+    # db.update({"humidityScore": str(humidityScore)})
+    # db.update({"temperatureScore": str(tempScore)})
     score = (tempScore + airPressureScore + humidityScore +
              airQualityScore + insideHumidityScore + insideTempScore)/6
     x = int(100-score)
-    #db.update({"severityScore": str(x)})
+    # db.update({"healthScore": str(x)})
     return x
 
 
@@ -153,7 +164,7 @@ app = Flask(__name__)
 def addOne():
     # request.get_data()
   #  print(request.data['data'].decode(encoding='UTF-8'))
-   # return jsonify(request.data.decode(encoding='UTF-8').['data'])
+   # return jsonify(reqdata_list = data_list.replace("\\n", "")
     request.get_data()
     # matter, humidity, temp
     print(request.data)
@@ -169,19 +180,29 @@ def addOne():
     data_list = data_list.replace("\"", "")
     data_list = data_list.replace("\\.", "")
     data_list = data_list.split(',')
-    if(len(data_list) != 1):
+    if(len(data_list) == 4):
         height = float(data_list[0])
         light = float(data_list[1])
         temp = float(data_list[2])
         humidity = float(data_list[3])
         soilMoisture = float(data_list[4])
         heightValues.append(height)
-        heightValues.append(light)
-        heightValues.append(temp)
-        heightValues.append(humidity)
-        heightValues.append(soilMoisture)
-        return str(returnTotalScore(data_list))
-    
+        lightValues.append(light)
+        tempValues.append(temp)
+        humidityValues.append(humidity)
+        soilMoistureValues.append(soilMoisture)
+        healthScoreValues.append(returnTotalScore(data_list))
+        return (str(returnTotalScore(data_list)))
+    if(data_list[0] == "health"):
+        return (str(createGraph("Health", healthScoreValues)))
+    if(data_list[0] == "height"):
+        return (str(createGraph("Height", heightValues)))
+    if(data_list[0] == "light"):
+        return (str(createGraph("Light", lightValues)))
+    if(data_list[0] == "temp"):
+        return (str(createGraph("Temperature", tempValues)))
+    if(data_list[0] == "humidity"):
+        return (str(createGraph("Humidity", humidityValues)))
     # answer = value
     # return 'sup'
 # @app.route('/hello')
