@@ -112,6 +112,8 @@ def addOne():
         return (str(returnTotalScore(data_list)) + "," + str(pumpVal))
     elif(data_list[0] == "health"):
         return (str(createGraph("Health", healthScoreValues)))
+    elif(data_list[0] == "healthVal"):
+        return (str(returnTotalScore(data_list)))
     elif(data_list[0] == "height"):
         return (str(createGraph("Height", heightValues)))
     elif(data_list[0] == "light"):
