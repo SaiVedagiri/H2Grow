@@ -87,13 +87,15 @@ def getData():
 
 
 def createGraph(varName, values):
-    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    # corresponding y axis values
+    x = []
 
-    if len(values) < 10:
-        y = valu
+    if len(values) < 50:
+        y = values
+    else:
+        y = values[-50:]
 
-    y = values[-10:]
+    for i in range(0,len(y)):
+            x.append(i)
 
     # plotting the points
     plt.plot(x, y)
@@ -180,7 +182,7 @@ def addOne():
     data_list = data_list.replace("\"", "")
     data_list = data_list.replace("\\.", "")
     data_list = data_list.split(',')
-    if(len(data_list) == 4):
+    if(len(data_list) == 5):
         height = float(data_list[0])
         light = float(data_list[1])
         temp = float(data_list[2])
@@ -200,9 +202,12 @@ def addOne():
     if(data_list[0] == "light"):
         return (str(createGraph("Light", lightValues)))
     if(data_list[0] == "temp"):
+        print(tempValues)
         return (str(createGraph("Temperature", tempValues)))
     if(data_list[0] == "humidity"):
         return (str(createGraph("Humidity", humidityValues)))
+    if(data_list[0] == "tempValues"):
+        return (str(tempValues[0]))
     # answer = value
     # return 'sup'
 # @app.route('/hello')
