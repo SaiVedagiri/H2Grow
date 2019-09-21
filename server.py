@@ -34,8 +34,11 @@ def createGraph(varName, values):
     # plotting the points
     plt.plot(x, y, color = 'red', scaley = False)
 
+    axes = plt.gca()
+    axes.set_ylim([0, 100])
+
     # naming the x axis
-    plt.xlabel('Time')
+    plt.xlabel('Time (seconds)')
     # naming the y axis
     plt.ylabel(varName)
 
@@ -115,18 +118,18 @@ def addOne():
             return "N/A"
         return (str(healthScoreValues[len(healthScoreValues)-1]))
     elif(data_list[0] == "height"):
-        return (str(createGraph("Height", heightValues)))
+        return (str(createGraph("Height (centimeters)", heightValues)))
     elif(data_list[0] == "light"):
-        return (str(createGraph("Light", lightValues)))
+        return (str(createGraph("Light (%)", lightValues)))
     elif(data_list[0] == "temp"):
         print(tempValues)
-        return (str(createGraph("Temperature", tempValues)))
+        return (str(createGraph("Temperature (degrees Celsius)", tempValues)))
     elif(data_list[0] == "humidity"):
-        return (str(createGraph("Humidity", humidityValues)))
+        return (str(createGraph("Relative Humidity (%)", humidityValues)))
     elif(data_list[0] == "tempValues"):
         return (str(tempValues[0]))
     elif(data_list[0] == "soil"):
-        return (str(createGraph("Soil Moisture", soilMoistureValues)))
+        return (str(createGraph("Soil Moisture (%)", soilMoistureValues)))
     elif(data_list[0] == 'water'):
         a = 40-soilMoistureValues
         if a >= 0:
