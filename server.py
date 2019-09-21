@@ -28,7 +28,6 @@ def createGraph(varName, values):
         y = values
     else:
         y = values[-10:]
-        values = values[-10:]
 
     for i in range(0, len(y)):
         x.append(i)
