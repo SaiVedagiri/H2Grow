@@ -7,12 +7,12 @@ import pyrebase
 from flask import Flask, jsonify, request, render_template
 import random as r
 import numpy as np
-import pandas as pd
+# import pandas as pd
 
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import load_boston
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.linear_model import LinearRegression
+# from sklearn.model_selection import train_test_split
+# from sklearn.datasets import load_boston
+# from sklearn.metrics import mean_squared_error, r2_score
+# from sklearn.linear_model import LinearRegression
 
 config = {
     "apiKey": "AIzaSyDHsfYrxFiLEzt6c0K_XYpRsz-wYn5avPw",
