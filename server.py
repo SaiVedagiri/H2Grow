@@ -53,7 +53,6 @@ def createGraph(varName, values):
         imageStr = base64.b64encode(imageFile.read())
     return str(imageStr)[2:-1]
 
-
 def returnTotalScore(h):
     height = float(h[0])
     soilMoisture = float(h[1])
