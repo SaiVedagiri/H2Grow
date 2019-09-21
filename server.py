@@ -22,6 +22,7 @@ healthScoreValues = list()
 
 def createGraph(varName, values):
     x = []
+    plt.clf()
 
     if len(values) < 50:
         y = values
@@ -32,7 +33,7 @@ def createGraph(varName, values):
         x.append(i)
 
     # plotting the points
-    plt.plot(x, y, color = 'red', scaley = False)
+    plt.plot(x, y, color = 'red')
 
     axes = plt.gca()
     axes.set_ylim([0, 100])
