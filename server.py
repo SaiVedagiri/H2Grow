@@ -86,7 +86,6 @@ def addOne():
    # return jsonify(reqdata_list = data_list.replace("\\n", "")
     request.get_data()
     # matter, humidity, temp
-    print(request.data)
     data_list = request.data.decode("utf-8")
     data_list = data_list.replace("\\r", "")
     data_list = data_list.replace("\\n", "")
@@ -122,11 +121,11 @@ def addOne():
             return "N/A"
         return (str(healthScoreValues[len(healthScoreValues)-1]))
     elif(data_list[0] == "height"):
+        print(heightValues)
         return (str(createGraph("Height (centimeters)", heightValues)))
     elif(data_list[0] == "light"):
         return (str(createGraph("Light (%)", lightValues)))
     elif(data_list[0] == "temp"):
-        print(tempValues)
         return (str(createGraph("Temperature (degrees Celsius)", tempValues)))
     elif(data_list[0] == "humidity"):
         return (str(createGraph("Relative Humidity (%)", humidityValues)))
