@@ -126,19 +126,21 @@ def addOne():
         if(soilMoisture >= 40):
             pumpVal = 0
         return (str(returnTotalScore(data_list)) + "," + str(pumpVal))
-    if(data_list[0] == "health"):
+    elif(data_list[0] == "health"):
         return (str(createGraph("Health", healthScoreValues)))
-    if(data_list[0] == "height"):
+    elif(data_list[0] == "height"):
         return (str(createGraph("Height", heightValues)))
-    if(data_list[0] == "light"):
+    elif(data_list[0] == "light"):
         return (str(createGraph("Light", lightValues)))
-    if(data_list[0] == "temp"):
+    elif(data_list[0] == "temp"):
         print(tempValues)
         return (str(createGraph("Temperature", tempValues)))
-    if(data_list[0] == "humidity"):
+    elif(data_list[0] == "humidity"):
         return (str(createGraph("Humidity", humidityValues)))
-    if(data_list[0] == "tempValues"):
+    elif(data_list[0] == "tempValues"):
         return (str(tempValues[0]))
+    else:
+        return "Invalid request"
     # answer = value
     # return 'sup'
 # @app.route('/hello')
