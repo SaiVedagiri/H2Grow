@@ -24,10 +24,10 @@ def createGraph(varName, values):
     x = []
     plt.clf()
 
-    if len(values) < 10:
+    if len(values) < 50:
         y = values
     else:
-        y = values[-10:]
+        y = values[-50:]
 
     for i in range(0, len(y)):
         x.append(i)
@@ -36,7 +36,6 @@ def createGraph(varName, values):
     plt.plot(x, y, color = 'red')
 
     axes = plt.gca()
-    axes.set_xlim([0, 10])
     axes.set_ylim([0, 100])
 
     # naming the x axis
