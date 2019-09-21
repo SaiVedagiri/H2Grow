@@ -45,7 +45,7 @@ def createGraph(varName, values):
     # function to show the plot
     plt.savefig("values.png", bbox_inches="tight")
 
-    with open("values.png", "rb") as imageFile:
+    with open("values.png", "b") as imageFile:
         imageStr = base64.b64encode(imageFile.read())
     return str(imageStr)[2:-1]
 
@@ -66,12 +66,10 @@ def returnTotalScore(h):
     score = (heightScore * 2 + soilScore * 3 + lightScore +
              tempScore + humidityScore)/8
     x = int(score)
+    if(x < 0):
+        x = 0
     return x
 
-
-# Cead the swagger.yml file to configure the endpoints
-
-# answer = ''
 app = Flask(__name__)
 # Create a URL route in our application for "/"
 @app.route('/api', methods=['POST'])
@@ -129,6 +127,12 @@ def addOne():
         return (str(tempValues[0]))
     elif(data_list[0] == "soil"):
         return (str(createGraph("Soil Moisture", soilMoistureValues)))
+    elif(data_list[0] == 'water'):
+        a = 40-soilMoistureValues
+        if a >= 0:
+            return str(a)
+        else:
+            return "0"
     else:
         return "Invalid request"
 
