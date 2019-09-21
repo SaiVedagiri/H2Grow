@@ -184,17 +184,20 @@ def addOne():
     data_list = data_list.split(',')
     if(len(data_list) == 5):
         height = float(data_list[0])
-        light = float(data_list[1])
-        temp = float(data_list[2])
-        humidity = float(data_list[3])
-        soilMoisture = float(data_list[4])
+        light = float(data_list[2])
+        temp = float(data_list[3])
+        humidity = float(data_list[4])
+        soilMoisture = float(data_list[1])
         heightValues.append(height)
         lightValues.append(light)
         tempValues.append(temp)
         humidityValues.append(humidity)
         soilMoistureValues.append(soilMoisture)
         healthScoreValues.append(returnTotalScore(data_list))
-        return (str(returnTotalScore(data_list)))
+        pumpVal = 1
+        if(soilMosture >= 40):
+            pumpBoolean = 0
+        return (str(returnTotalScore(data_list)) + "," + str(pumpVal))
     if(data_list[0] == "health"):
         return (str(createGraph("Health", healthScoreValues)))
     if(data_list[0] == "height"):
