@@ -32,7 +32,7 @@ def createGraph(varName, values):
         x.append(i)
 
     # plotting the points
-    plt.plot(x, y)
+    plt.plot(x, y, color = 'red', scaley = False)
 
     # naming the x axis
     plt.xlabel('Time')
@@ -45,7 +45,7 @@ def createGraph(varName, values):
     # function to show the plot
     plt.savefig("values.png", bbox_inches="tight")
 
-    with open("values.png", "b") as imageFile:
+    with open("values.png", "rb") as imageFile:
         imageStr = base64.b64encode(imageFile.read())
     return str(imageStr)[2:-1]
 
