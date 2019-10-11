@@ -1,4 +1,4 @@
-# HackHSNTest
+# H2Grow
 
 ## Inspiration
 Two of our team members have often visited India and noticed that there is a significant lack of water as compared to western countries such as the United States. Much of this water gets wasted when people try to grow plants, and provide their plant too much water. Our project aims to combat this issue by providing an easy to use interface to demonstrate the ideal amount of water, temperature, light, and other environmental factors such that the plant can prosper without using too much water.
